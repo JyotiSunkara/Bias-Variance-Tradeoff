@@ -3,6 +3,7 @@ import matplotlib.pyplot as plot
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import PolynomialFeatures
 
 file = open('Assignment/Q1_data/data.pkl', 'rb')
@@ -36,7 +37,7 @@ linearRegressor = LinearRegression()
 
 j = 0  
 while j < 10: # Choosing training subset 
-
+    degree_array = []
     bias_array = []
     variance_array = []
     i = 1
@@ -52,7 +53,7 @@ while j < 10: # Choosing training subset
         # plot.xlabel('X')
         # plot.ylabel('Y')
         # plot.show()
-        i = i + 1
+        
 
         # print(X_test.shape, X_train_split[j].shape)
         X_test_poly = poly.fit_transform(X_test)
@@ -60,12 +61,17 @@ while j < 10: # Choosing training subset
         # print(Outputs)
         # print(Outputs.shape)
         bias = np.mean((np.mean(Outputs) - Y_test) ** 2)
-        bias = np.sqrt(bias)
         variance = np.var(Outputs)
-        bias_array.append(bias)
-        variance_array.append(variance)
         print(variance)
         print(bias)
+        bias = np.sqrt(bias)
+
+        bias_array.append(bias)
+        variance_array.append(variance)
+        degree_array.append(int(i))
+
+        i = i + 1
+        
 
     plot.plot(range(1,10), bias_array, color = 'red')
     plot.plot(range(1,10), variance_array, color = 'blue')
@@ -74,18 +80,19 @@ while j < 10: # Choosing training subset
     plot.ylabel('Y')
     plot.show()
 
-    # fig, ax = plot.subplots()
-    # collabel = "Bias^2", "Variance"
-    # celltext = np.append(bias_array, variance_array)
-    # ax.xaxis.set_visible(False) 
-    # ax.yaxis.set_visible(False)
-    # ax.table(cellText = celltext, colLabels = collabel, loc='center')
+    fig, ax = plot.subplots()
+    fig.patch.set_visible(False)
+    ax.axis('off')
+    ax.axis('tight')
+    bias_array = np.array(bias_array)
+    variance_array = np.array(variance_array)
 
-    # ax.plot(celltext[:,0],celltext[:,1])
+    data_frame = pd.DataFrame(np.column_stack((range(1,10) ,bias_array, variance_array)) , columns=list("DBV"))
 
-    # fig.tight_layout()
-
-    # plot.show()
+    ax.table(cellText=data_frame.values, colLabels=data_frame.columns, loc='center')
+    fig.tight_layout()
+    plot.title('Bias^2 & Variance for Training Set ' + str(j), loc = 'center')
+    plot.show()
     
     j = j + 1
     # plot.show()
