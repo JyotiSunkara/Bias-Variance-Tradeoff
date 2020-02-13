@@ -28,7 +28,6 @@ Y_train = training_data[:, 1]
 X_train_split = np.array_split(X_train, 10)
 Y_train_split = np.array_split(Y_train, 10)
 
-# Training polynomials
 linearRegressor = LinearRegression()
 
 meanVariance = []
