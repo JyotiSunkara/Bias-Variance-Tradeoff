@@ -33,17 +33,28 @@ Y_train_split = np.array_split(Y_train, 10)
 # Training polynomials
 linearRegressor = LinearRegression()
 
+# j = 0
+i = 1 
+degree_array = [] 
+meanVariance = []
+meanBias = []
 
+# print(Outputs.shape)
 
-j = 0  
-while j < 10: # Choosing training subset 
-    degree_array = []
-    bias_array = []
-    variance_array = []
-    i = 1
-    while i < 10: # Choosing polynomial power
+# print(len(Y_test))
+while i < 10: # Choosing polynomial power 
+    
+    # bias_array = []
+    # variance_array = []
+    Outputs = np.empty([len(Y_test)])
+    poly = PolynomialFeatures(i)
+    X_test_poly = poly.fit_transform(X_test)
+    
+    # i = 1
+    j = 0
+    while j < 10: # Choosing training set
 
-        poly = PolynomialFeatures(i)
+       
         X_poly = poly.fit_transform(X_train_split[j])
         # print(X_poly)
         linearRegressor.fit(X_poly, Y_train_split[j])        
@@ -55,47 +66,58 @@ while j < 10: # Choosing training subset
         # plot.show()
         
 
+
         # print(X_test.shape, X_train_split[j].shape)
-        X_test_poly = poly.fit_transform(X_test)
-        Outputs = linearRegressor.predict(X_test_poly)
-        # print(Outputs)
-        # print(Outputs.shape)
-        bias = np.mean((np.mean(Outputs) - Y_test) ** 2)
-        variance = np.var(Outputs)
-        print(variance)
-        print(bias)
-        bias = np.sqrt(bias)
 
-        bias_array.append(bias)
-        variance_array.append(variance)
-        degree_array.append(int(i))
+        # X_test_poly = poly.fit_transform(X_test)
+        # print(linearRegressor.predict(X_test_poly).shape)
+        Outputs = np.column_stack((Outputs, linearRegressor.predict(X_test_poly)))
+        j = j + 1
 
-        i = i + 1
         
 
-    plot.plot(range(1,10), bias_array, color = 'red')
-    plot.plot(range(1,10), variance_array, color = 'blue')
-    plot.title('Bias^2 & Variance')
-    plot.xlabel(j)
-    plot.ylabel('Y')
-    plot.show()
+        # print(Outputs)
+        print(Outputs.shape)
+        # bias = np.mean((np.mean(Outputs) - Y_test) ** 2)
+        # variance = np.var(Outputs)
+        # print(variance)
+        # print(bias)
+        # bias = np.sqrt(bias)
 
-    fig, ax = plot.subplots()
-    fig.patch.set_visible(False)
-    ax.axis('off')
-    ax.axis('tight')
-    bias_array = np.array(bias_array)
-    variance_array = np.array(variance_array)
+        # bias_array.append(bias)
+        # variance_array.append(variance)
+        # degree_array.append(int(i))    
 
-    data_frame = pd.DataFrame(np.column_stack((range(1,10) ,bias_array, variance_array)) , columns=list("DBV"))
+    degree_array.append(i)
+    variance = np.var(Outputs, axis = 0)
+    meanVariance.append(np.mean(variance))
+    # bias = (Outputs - Y_test) ** 2
+    # meanBias.append(np.mean(bias))
 
-    ax.table(cellText=data_frame.values, colLabels=data_frame.columns, loc='center')
-    fig.tight_layout()
-    plot.title('Bias^2 & Variance for Training Set ' + str(j), loc = 'center')
-    plot.show()
-    
-    j = j + 1
+    i += 1
     # plot.show()
+     
+
+# plot.plot(range(1,10), meanBias, color = 'red')
+plot.plot(range(1,10), meanVariance, color = 'blue')
+plot.title('Bias^2 & Variance')
+plot.xlabel("Complexity")
+plot.ylabel('Y')
+plot.show()
+
+# fig, ax = plot.subplots()
+# fig.patch.set_visible(False)
+# ax.axis('off')
+# ax.axis('tight')
+
+# df = pd.DataFrame(np.column_stack((range(1,10) ,meanBias, meanVariance)) , columns=list("DBV"))
+# df.D = df.D.astype(int)
+# ax.table(cellText=df.values, colLabels=df.columns, loc='center')
+# fig.tight_layout()
+# plot.title('Bias^2 & Variance' + str(j), loc = 'center')
+# plot.show()
+    
+
 
 
 
