@@ -42,6 +42,7 @@ meanBias = []
 # print(Outputs.shape)
 
 # print(len(Y_test))
+print(X_test.shape)
 while i < 10: # Choosing polynomial power 
     
     # bias_array = []
@@ -49,7 +50,6 @@ while i < 10: # Choosing polynomial power
     Outputs = np.empty([len(Y_test)])
     poly = PolynomialFeatures(i)
     X_test_poly = poly.fit_transform(X_test)
-    
     # i = 1
     j = 0
     while j < 10: # Choosing training set
@@ -72,12 +72,8 @@ while i < 10: # Choosing polynomial power
         # X_test_poly = poly.fit_transform(X_test)
         # print(linearRegressor.predict(X_test_poly).shape)
         Outputs = np.column_stack((Outputs, linearRegressor.predict(X_test_poly)))
+        # print(Outputs.shape)
         j = j + 1
-
-        
-
-        # print(Outputs)
-        print(Outputs.shape)
         # bias = np.mean((np.mean(Outputs) - Y_test) ** 2)
         # variance = np.var(Outputs)
         # print(variance)
@@ -88,8 +84,9 @@ while i < 10: # Choosing polynomial power
         # variance_array.append(variance)
         # degree_array.append(int(i))    
 
-    degree_array.append(i)
-    variance = np.var(Outputs, axis = 0)
+    #degree_array.append(i)
+    # variance_polynomial_array.append(np.mean(np.var(Outputs, axis = 1)))
+    variance = np.var(Outputs, axis = 1)
     meanVariance.append(np.mean(variance))
     # bias = (Outputs - Y_test) ** 2
     # meanBias.append(np.mean(bias))
