@@ -68,7 +68,7 @@ fig.patch.set_visible(False)
 ax.axis('off')
 ax.axis('tight')
 
-df = pd.DataFrame(np.column_stack((range(1,10) ,meanBias, meanVariance)) , columns=list("DBV"))
+df = pd.DataFrame(np.column_stack((range(1,10) ,meanBias, meanVariance)) , columns=['Degree', 'Bias', 'Variance'])
 df.D = df.D.astype(int)
 ax.table(cellText=df.values, colLabels=df.columns, loc='center')
 fig.tight_layout()
