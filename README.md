@@ -90,6 +90,7 @@ from sklearn.preprocessing import PolynomialFeatures
 ### Data Resampling 
 
 - 5000 entries of the form ( x<sub>i</sub> , y<sub>i</sub> ) are present are loaded using the `pickle` library, in numpy format.
+  
 ```python
 file = open('Assignment/Q1_data/data.pkl', 'rb')
 data =  pickle.load(file)
@@ -153,7 +154,7 @@ We further average it out for each polynomial.
 ![Table](./Images/table1.png)
 
 <div style="text-align:left;"><img src="./Images/variance1.png" /></div>
-
+<br>
 <div style="text-align:left;"><img src="./Images/bias1.png" /></div>
 
 ![Graph](./Images/graph1.png)
@@ -243,7 +244,7 @@ This is calculated and averaged out for each polynomial as follows,
 ![Table](./Images/table2.png)
 
 <div style="text-align:left;"><img src="./Images/variance2.png" /></div>
-
+<br>
 <div style="text-align:left;"><img src="./Images/bias2.png" /></div>
 
 ![Graph](./Images/graph2.png)
