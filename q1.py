@@ -44,13 +44,14 @@ for i in range(1, 10): # Choosing polynomial power
     for j in range(0, 10): # Choosing training set
         X_poly = poly.fit_transform(X_train_split[j])
         linearRegressor.fit(X_poly, Y_train_split[j])  # Training model on subset
-        # plot.scatter(X_train_split[j], Y_train_split[j], color = 'red')
-        # plot.scatter(X_train_split[j], linearRegressor.predict(X_poly), color = 'blue')
-        # plot.title('Polynomial Degree '+ str(i) + ' X vs Y on Training set ' + str(j))
-        # plot.xlabel('X')
-        # plot.ylabel('Y')
-        # plot.savefig('Models/Poly'+str(i)+'Model'+str(j)+'.png')   
-        # plot.close()        
+        if j == 0:
+            plot.scatter(X_train_split[j], Y_train_split[j], color = 'red')
+            plot.scatter(X_train_split[j], linearRegressor.predict(X_poly), color = 'blue')
+            plot.title('Polynomial Degree '+ str(i) + ' X vs Y on Training set ' + str(j))
+            plot.xlabel('X')
+            plot.ylabel('Y')
+            plot.savefig('Models/Poly'+str(i)+'Model'+str(j)+'.png')   
+            plot.close()        
         poly_prediction.append(linearRegressor.predict(X_test_poly)) # Predicting test set output on model
         j += 1
 
