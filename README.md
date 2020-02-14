@@ -143,15 +143,6 @@ We further average it out for each polynomial.
 
 ![Models](./Images/Q1.jpg)
 
-### Observervations
-
-Here, it can be seen that the bias decreases as the complexity of the polynomial increases and the variance shows a slight increase as the degree of the polynomial increases.
-
-This is in accordance with the Bias-Variance tradeoff where an optimum model is reached when total error is minimised.
-
-When our polynomial is too simple and has very few parameters then a high
-bias and low variance is observed. On the other hand, if our model has a large number of parameters then high variance and low bias is observed.
-
 ### Tabulated Values
 ![Table](./Images/table1.png)
 
@@ -163,6 +154,19 @@ bias and low variance is observed. On the other hand, if our model has a large n
 
 ### Bias<sup>2</sup> Versus Variance Graph
 ![Graph](./Images/graph1.png)
+
+### Observervations
+
+The **bias decreases** and the **variance increases** as the *degree of the polynomial increases*.
+
+That is, with increase in the number of features, or complexity (essentially increasing the degree of the model), the model becomes **more flexible**. It extracts more information from the training sets and fits the data well. The values it predicts are close to the actual values, giving lesser bias. 
+
+However, as it extracts more information, it also starts **memorizing the noise**. It does not generalize well and gives a lot of variation on data sets that it has not seen before, ie variance increases.
+Some (minor) bumps are observed in the variance graph but the overall trend is still increasing.
+
+For lower degree polynomial models, we observe high bias and low variance. The model may not be able to perform well even on existing training data since the polynomial is so simple that it cannot capture the features of the training data. The variance is low since the model may not give accurate predictions but it does so consistently, generalizing well.
+
+This is in accordance with the Bias-Variance tradeoff where an optimum model is reached when total error is minimised.
 
  ## Question 2
 
@@ -253,3 +257,15 @@ bias and low variance is observed. On the other hand, if our model has a large n
 
 ### Bias<sup>2</sup> Versus Variance Graph
 ![Graph](./Images/graph2.png)
+
+### Observervations
+
+The **bias decreases** and the **variance increases** steadily as the *degree of the polynomial increases*.
+
+That is, with increase in the number of features, or complexity (essentially increasing the degree of the model), the model becomes **more flexible**. It extracts more information from the training sets and fits the data well. The values it predicts are close to the actual values, giving lesser bias. 
+
+However, as it extracts more information, it also starts **memorizing the noise**. It does not generalize well and gives a lot of variation on data sets that it has not seen before, ie variance increases.
+
+For lower degree polynomial models, we observe high bias and low variance. The model may not be able to perform well even on existing training data since the polynomial is so simple that it cannot capture the features of the training data. The variance is low since the model may not give accurate predictions but it does so consistently, generalizing well.
+
+This is in accordance with the Bias-Variance tradeoff where an optimum model is reached when total error is minimised.
