@@ -2,7 +2,46 @@
 
  Calculation of the bias and variance after training two models.
 
- ## Getting Started
+## Introduction
+
+The **prediction error** for any machine learning algorithm can be broken down into three parts:
+
+### Bias error
+Bias is the difference between the average prediction of our model and the correct value which we are trying to predict.
+
+### Variance error
+Variance is the variability of a model prediction for a given data point.
+
+### Irreducible error
+Irreducible error cannot be reduced regardless of what algorithm is used. It arises due to the chosen framing of the problem and may be caused by factors like unknown variables that influence the mapping of the input variables to the output variables.
+
+### Bias-Variance Trade-Off
+
+Bias–variance problem is the conflict in trying to simultaneously minimize these two sources of error that prevent supervised learning algorithms from generalizing beyond their training set.
+
+If our model is too simple and has very few parameters then it may have high bias and low variance. The model unable to capture the underlying pattern of the data. This is known as ***underfitting***.
+
+It may occur when we 
+- Use less amount of data
+- try to build a linear model with a nonlinear data
+
+On the other hand if our model has large number of parameters then it’s going to have high variance and low bias. The model captures the noise along with the underlying pattern in data. This is known as ***overfitting***. 
+
+It may occur when we
+- Use a small dataset and the model satisfies these datapoints exactly 
+- Use an unnecessarily complex algorithm
+
+<div style="text-align:center;"><img src="./Images/trade-off.png" /></div>
+
+
+This tradeoff in complexity is why there is a tradeoff between bias and variance. An algorithm can’t be more complex and less complex at the same time.
+
+> We need to find the right/good balance without overfitting and underfitting the data.
+
+<div style="text-align:center"><img src="./Images/fitting.png" /></div>
+
+
+## Getting Started
 
  Unzip the folder, run the scripts and view the saved tables and graphs for question 1 and 2 in the current directory.
 ```bash
@@ -25,9 +64,6 @@ $ make seeOne  # Data visualization for question 1
 $ make seeTwo  # Data visualization for question 2
 $ make clean
 ```
-
-
-
  
  ## Libraries Used
  ```python
@@ -100,33 +136,7 @@ This is calculated and averaged out for each polynomial as follows,
   
 ### Listed are the plots for the models obtained using the `LinearRegression()` function using the first randomly generated test set for the respective polynomials.
 
-### y = mx + c
-![Model](./Models/Poly1Model0.png)
-### y = ax<sup>2</sup> + bx + c
-![Model](./Models/Poly2Model0.png)
-
-### y = ax<sup>3</sup>  + bx<sup>2</sup> + cx + d
-![Model](./Models/Poly3Model0.png)
-
-### y = ax<sup>4</sup>  + bx<sup>3</sup> + cx<sup>2</sup> + dx + e
-![Model](./Models/Poly4Model0.png)
-
-### y = ax<sup>5</sup>  + bx<sup>4</sup> + cx<sup>3</sup> + dx<sup>2</sup> + ex + f
-![Model](./Models/Poly5Model0.png)
-
-### y = ax<sup>6</sup>  + bx<sup>5</sup> + cx<sup>4</sup> + dx<sup>3</sup> + ex<sup>2</sup> + fx + g
-![Model](./Models/Poly6Model0.png)
-
-### y = ax<sup>7</sup>  + bx<sup>6</sup> + cx<sup>5</sup> + dx<sup>4</sup> + ex<sup>3</sup> + fx<sup>2</sup> + gx + h
-![Model](./Models/Poly7Model0.png)
-
-### y = ax<sup>8</sup>  + bx<sup>7</sup> + cx<sup>6</sup> + dx<sup>5</sup> + ex<sup>4</sup> + fx<sup>3</sup> + gx<sup>2</sup> + hx + i
-![Model](./Models/Poly8Model0.png)
-
-### y = ax<sup>9</sup>  + bx<sup>8</sup> + cx<sup>7</sup> + dx<sup>6</sup> + ex<sup>5</sup> + fx<sup>4</sup> + gx<sup>3</sup> + hx<sup>2</sup> + ix + j 
-![Model](./Models/Poly9Model0.png)
-
-
+![Models](./Images/Q1.jpg)
 
 ### Observervations
 
@@ -138,20 +148,52 @@ When our polynomial is too simple and has very few parameters then a high
 bias and low variance is observed. On the other hand, if our model has a large number of parameters then high variance and low bias is observed.
 
 ### Tabulated Values
-![Table](./table1.png)
+![Table](./Images/table1.png)
+
 ### Bias<sup>2</sup> Versus Variance Graph
-![Graph](./graph1.png)
+![Graph](./Images/graph1.png)
 
  ## Question 2
 
 ### Data Resampling 
 
 - 20 subsets of 400 entries of X datapoints each are loaded as the training set and 1 set of 80 entries of X datapoints is loaded as the testing set using the `pickle` library, in numpy format. Corresponding Y sets are loaded as well.
-  
+```python
+file = open('Assignment/Q2_data/X_train.pkl', 'rb')
+X_train =  pickle.load(file)
+file.close()
+file = open('Assignment/Q2_data/Y_train.pkl', 'rb')
+Y_train =  pickle.load(file)
+file.close()
+file = open('Assignment/Q2_data/X_test.pkl', 'rb')
+X_test =  pickle.load(file)
+file.close()
+file = open('Assignment/Q2_data/Fx_test.pkl', 'rb')
+Y_test =  pickle.load(file)
+file.close()
+```
 - The training data has 20 subsets. This is now used to calculate the variance by generating multiple realisations of the model. 
 
-- Now, the outer loop selects the degree of the polynomial and the inner loop chooses the training set and a model is generated using the 
-  
+- Now, the outer loop selects the degree of the polynomial and the inner loop chooses the training set and a model is generated for each traning set.
+
+```python
+for i in range(1, 10): # Choosing polynomial power 
+    poly_prediction = []
+    poly = PolynomialFeatures(i)
+    X_test_poly = poly.fit_transform(X_test)
+
+    for j in range(0, 20): # Choosing training set
+        x_train = X_train[j]
+        x_train = x_train[:,np.newaxis]
+
+        X_poly = poly.fit_transform(x_train)
+        linearRegressor.fit(X_poly, Y_train[j])  # Training model on subset
+
+        X_test_poly = poly.fit_transform(X_test)            
+        poly_prediction.append(linearRegressor.predict(X_test_poly)) # Predicting test set output on model
+```
+- The prediction of test set data on each model is appended to a list for that polynomial. This is used to calculate variance and bias further.
+
 ### Bias - Variance Tradeoff
 
 > ***Variance*** is the variability of a model prediction for a given data point.
@@ -176,33 +218,7 @@ This is calculated and averaged out for each polynomial as follows,
   
 ### Listed are the plots for the models obtained using the `LinearRegression()` function using the first randomly generated test set for the respective polynomials.
 
-### y = mx + c
-![Model](./Bodels/Poly1Model0.png)
-### y = ax<sup>2</sup> + bx + c
-![Model](./Bodels/Poly2Model0.png)
-
-### y = ax<sup>3</sup>  + bx<sup>2</sup> + cx + d
-![Model](./Bodels/Poly3Model0.png)
-
-### y = ax<sup>4</sup>  + bx<sup>3</sup> + cx<sup>2</sup> + dx + e
-![Model](./Bodels/Poly4Model0.png)
-
-### y = ax<sup>5</sup>  + bx<sup>4</sup> + cx<sup>3</sup> + dx<sup>2</sup> + ex + f
-![Model](./Bodels/Poly5Model0.png)
-
-### y = ax<sup>6</sup>  + bx<sup>5</sup> + cx<sup>4</sup> + dx<sup>3</sup> + ex<sup>2</sup> + fx + g
-![Model](./Bodels/Poly6Model0.png)
-
-### y = ax<sup>7</sup>  + bx<sup>6</sup> + cx<sup>5</sup> + dx<sup>4</sup> + ex<sup>3</sup> + fx<sup>2</sup> + gx + h
-![Model](./Bodels/Poly7Model0.png)
-
-### y = ax<sup>8</sup>  + bx<sup>7</sup> + cx<sup>6</sup> + dx<sup>5</sup> + ex<sup>4</sup> + fx<sup>3</sup> + gx<sup>2</sup> + hx + i
-![Model](./Bodels/Poly8Model0.png)
-
-### y = ax<sup>9</sup>  + bx<sup>8</sup> + cx<sup>7</sup> + dx<sup>6</sup> + ex<sup>5</sup> + fx<sup>4</sup> + gx<sup>3</sup> + hx<sup>2</sup> + ix + j 
-![Model](./Bodels/Poly9Model0.png)
-
-
+![Model](./Images/Q2.jpg)
 
 ### Observervations
 
@@ -214,6 +230,6 @@ When our polynomial is too simple and has very few parameters then a high
 bias and low variance is observed. On the other hand, if our model has a large number of parameters then high variance and low bias is observed.
 
 ### Tabulated Values
-![Table](./table2.png)
+![Table](./Images/table2.png)
 ### Bias<sup>2</sup> Versus Variance Graph
-![Graph](./graph2.png)
+![Graph](./Images/graph2.png)
