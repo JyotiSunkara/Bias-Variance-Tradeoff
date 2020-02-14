@@ -42,15 +42,6 @@ for i in range(1, 10): # Choosing polynomial power
 
         X_test_poly = poly.fit_transform(X_test)            
         poly_prediction.append(linearRegressor.predict(X_test_poly)) # Predicting test set output on model
-        if j == 0:
-            plot.scatter(X_train[j], Y_train[j], color = 'red')
-            plot.scatter(X_train[j], linearRegressor.predict(X_poly), color = 'blue')
-            plot.title('Polynomial Degree '+ str(i) + ' X vs Y on Training set ' + str(j))
-            plot.xlabel('X')
-            plot.ylabel('Y')
-            plot.savefig('Bodels/Poly'+str(i)+'Model'+str(j)+'.png')   
-            plot.close()   
-
         j += 1
         
     # poly_prediction is a 20*80 matrix
