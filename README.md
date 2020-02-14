@@ -6,13 +6,13 @@
 
 The **prediction error** for any machine learning algorithm can be broken down into three parts:
 
-### Bias error
+> ### Bias error
 Bias is the difference between the average prediction of our model and the correct value which we are trying to predict.
 
-### Variance error
+> ### Variance error
 Variance is the variability of a model prediction for a given data point.
 
-### Irreducible error
+> ### Irreducible error
 Irreducible error cannot be reduced regardless of what algorithm is used. It arises due to the chosen framing of the problem and may be caused by factors like unknown variables that influence the mapping of the input variables to the output variables.
 
 ### Bias-Variance Trade-Off
@@ -32,7 +32,6 @@ It may occur when we
 - Use an unnecessarily complex algorithm
 
 <div style="text-align:center;"><img src="./Images/trade-off.png" /></div>
-
 
 This tradeoff in complexity is why there is a tradeoff between bias and variance. An algorithm can’t be more complex and less complex at the same time.
 
@@ -82,6 +81,7 @@ from sklearn.preprocessing import PolynomialFeatures
 ## Question 1
 
 ### Data Resampling 
+
 - 5000 entries of the form ( x<sub>i</sub> , y<sub>i</sub> ) are present are loaded using the `pickle` library, in numpy format.
 ```python
 file = open('Assignment/Q1_data/data.pkl', 'rb')
@@ -113,11 +113,14 @@ Y_train_split = np.array_split(Y_train, 10)
 
 ### Bias - Variance Tradeoff
 
-> ***Variance*** is the variability of a model prediction for a given data point.
+- We have repeated the entire model building process `10` times for each polynomial. 
+- The outer loop chooses the polynomial and inner loop chooses 1 of the `10` training sets.
 
-- We have repeated the entire model building process `10` times for each polynomial. The variance is how much the predictions for a given point vary between different realizations of the model.
+#### Calculating variance
 
+- The variance is how much the predictions for a given point vary between different realizations of the model. 
 This is calculated and averaged out for each polynomial as follows,
+
 ```python
     np.mean(np.var(poly_prediction, axis = 0))
 ```
@@ -125,14 +128,17 @@ This is calculated and averaged out for each polynomial as follows,
 
 - `axis = 0` specificies that we traverse the matrix column-wise to obtain different model predictions for a single test data point.
 
->  ***Bias*** is the difference between the average prediction of our model and the correct value which we are trying to predict.
+#### Calculating bias
 
-This is calculated and averaged out for each polynomial as follows,
+We subtract the Y_test values with the predicted values of X_test on each model.
+We further average it out for each polynomial.
+
 ```python
-    (np.mean(poly_prediction, axis = 0) - Y_test)**2
+    bias = abs(np.mean(poly_prediction, axis = 0) - Y_test) # 500 bias values - takes mean of all same polynomial models at a test point
 ```
 - Here, `Y_test` represents the correct output value for the input data point.
-  
+
+
 ### Listed are the plots for the models obtained using the `LinearRegression()` function using the first randomly generated test set for the respective polynomials.
 
 ![Models](./Images/Q1.jpg)
@@ -148,6 +154,12 @@ bias and low variance is observed. On the other hand, if our model has a large n
 
 ### Tabulated Values
 ![Table](./Images/table1.png)
+
+### Variance graph
+<div style="text-align:left;"><img src="./Images/variance1.png" /></div>
+
+### Bias graph
+<div style="text-align:left;"><img src="./Images/bias1.png" /></div>
 
 ### Bias<sup>2</sup> Versus Variance Graph
 ![Graph](./Images/graph1.png)
@@ -195,11 +207,13 @@ for i in range(1, 10): # Choosing polynomial power
 
 ### Bias - Variance Tradeoff
 
-> ***Variance*** is the variability of a model prediction for a given data point.
+- We have repeated the entire model building process `20` times for each polynomial. 
 
-- We have repeated the entire model building process `20` times for each polynomial. The variance is how much the predictions for a given point vary between different realizations of the model.
+#### Calculating variance
 
+The variance is how much the predictions for a given point vary between different realizations of the model.
 This is calculated and averaged out for each polynomial as follows,
+
 ```python
     np.mean(np.var(poly_prediction, axis = 0))
 ```
@@ -207,14 +221,14 @@ This is calculated and averaged out for each polynomial as follows,
 
 - `axis = 0` specificies that we traverse the matrix column-wise to obtain different model predictions for a single test data point.
 
->  ***Bias*** is the difference between the average prediction of our model and the correct value which we are trying to predict.
+#### Calculating bias
 
 This is calculated and averaged out for each polynomial as follows,
 ```python
     (np.mean(poly_prediction, axis = 0) - Y_test)**2
 ```
 - Here, `Y_test` represents the correct output value for the input data point.
-  
+
 ### Listed are the plots for the models obtained using the `LinearRegression()` function using the first randomly generated test set for the respective polynomials.
 
 ![Model](./Images/Q2.jpg)
@@ -230,5 +244,12 @@ bias and low variance is observed. On the other hand, if our model has a large n
 
 ### Tabulated Values
 ![Table](./Images/table2.png)
+
+### Variance graph
+<div style="text-align:left;"><img src="./Images/variance2.png" /></div>
+
+### Bias graph
+<div style="text-align:left;"><img src="./Images/bias2.png" /></div>
+
 ### Bias<sup>2</sup> Versus Variance Graph
 ![Graph](./Images/graph2.png)
