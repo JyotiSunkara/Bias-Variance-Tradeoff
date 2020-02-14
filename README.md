@@ -9,11 +9,17 @@ The **prediction error** for any machine learning algorithm can be broken down i
 > ### Bias error
 Bias is the difference between the average prediction of our model and the correct value which we are trying to predict.
 
+<div style="text-align:center;"><img src="./Images/Bias.png" /></div>
+
 > ### Variance error
 Variance is the variability of a model prediction for a given data point.
+<div style="text-align:center;"><img src="./Images/Variance.png" /></div>
 
 > ### Irreducible error
 Irreducible error cannot be reduced regardless of what algorithm is used. It arises due to the chosen framing of the problem and may be caused by factors like unknown variables that influence the mapping of the input variables to the output variables.
+
+<div style="text-align:center;"><img src="./Images/DefError.png" /></div>
+<div style="text-align:center;"><img src="./Images/Error.png" /></div>
 
 ### Bias-Variance Trade-Off
 
@@ -260,12 +266,13 @@ bias and low variance is observed. On the other hand, if our model has a large n
 
 ### Observervations
 
-The **bias decreases** and the **variance increases** steadily as the *degree of the polynomial increases*.
+- The ***bias decreases*** and the ***variance increases*** steadily as the *degree of the polynomial increases*.
 
-That is, with increase in the number of features, or complexity (essentially increasing the degree of the model), the model becomes **more flexible**. It extracts more information from the training sets and fits the data well. The values it predicts are close to the actual values, giving lesser bias. 
+- That is, with increase in the number of features, or complexity (essentially increasing the degree of the model), the model becomes ***more flexible***. It extracts more information from the training sets and fits the data well. The values it predicts are close to the actual values, giving lesser bias. 
 
-However, as it extracts more information, it also starts **memorizing the noise**. It does not generalize well and gives a lot of variation on data sets that it has not seen before, ie variance increases.
+- However, as it extracts more information, it also starts ***memorizing the noise***. It does not generalize well and gives a lot of variation on data sets that it has not seen before, ie variance increases.
 
-For lower degree polynomial models, we observe high bias and low variance. The model may not be able to perform well even on existing training data since the polynomial is so simple that it cannot capture the features of the training data. The variance is low since the model may not give accurate predictions but it does so consistently, generalizing well.
+- For lower degree polynomial models, we observe high bias and low variance. The model may not be able to perform well even on existing training data since the polynomial is so simple that it cannot capture the features of the training data. The variance is low since the model may not give accurate predictions but it does so consistently, generalizing well.
 
-This is in accordance with the Bias-Variance tradeoff where an optimum model is reached when total error is minimised.
+- This is in accordance with the Bias-Variance tradeoff where an optimum model is reached when total error is minimised.
+  
