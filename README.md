@@ -51,6 +51,7 @@ This tradeoff in complexity is why there is a tradeoff between bias and variance
 ```bash
 $ unzip 33_assgn1.zip
 $ cd 33_assgn1
+$ pip install -r requirements.txt
 $ python3 q1.py  # Graph and table will be displayed and saved in current directory
 $ eog graph1.png
 $ eog table1.png
@@ -149,16 +150,12 @@ We further average it out for each polynomial.
 
 ![Models](./Images/Q1.jpg)
 
-### Tabulated Values
 ![Table](./Images/table1.png)
 
-### Variance graph
 <div style="text-align:left;"><img src="./Images/variance1.png" /></div>
 
-### Bias graph
 <div style="text-align:left;"><img src="./Images/bias1.png" /></div>
 
-### Bias<sup>2</sup> Versus Variance Graph
 ![Graph](./Images/graph1.png)
 
 ### Observervations
@@ -243,25 +240,12 @@ This is calculated and averaged out for each polynomial as follows,
 
 ![Model](./Images/Q2.jpg)
 
-### Observervations
-
-Here, it can be seen that the bias decreases as the complexity of the polynomial increases and the variance shows a slight increase as the degree of the polynomial increases.
-
-This is in accordance with the Bias-Variance tradeoff where an optimum model is reached when total error is minimised.
-
-When our polynomial is too simple and has very few parameters then a high
-bias and low variance is observed. On the other hand, if our model has a large number of parameters then high variance and low bias is observed.
-
-### Tabulated Values
 ![Table](./Images/table2.png)
 
-### Variance graph
 <div style="text-align:left;"><img src="./Images/variance2.png" /></div>
 
-### Bias graph
 <div style="text-align:left;"><img src="./Images/bias2.png" /></div>
 
-### Bias<sup>2</sup> Versus Variance Graph
 ![Graph](./Images/graph2.png)
 
 ### Observervations
