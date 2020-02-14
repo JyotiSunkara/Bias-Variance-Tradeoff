@@ -42,6 +42,15 @@ for i in range(1, 10): # Choosing polynomial power
 
         X_test_poly = poly.fit_transform(X_test)            
         poly_prediction.append(linearRegressor.predict(X_test_poly)) # Predicting test set output on model
+        
+        # plot.scatter(X_train[j], Y_train[j], color = 'red')
+        # plot.scatter(X_train[j], linearRegressor.predict(X_poly), color = 'blue')
+        # plot.title('Polynomial Degree '+ str(i) + ' X vs Y on Training set ' + str(j))
+        # plot.xlabel('X')
+        # plot.ylabel('Y')
+        # plot.savefig('Bodels/Poly'+str(i)+'Model'+str(j)+'.png')   
+        # plot.close()   
+
         j += 1
         
     # poly_prediction is a 20*80 matrix
@@ -53,12 +62,14 @@ for i in range(1, 10): # Choosing polynomial power
     i += 1
      
 
-plot.plot(range(1,10), meanBiasSquare, color = 'red')
-plot.plot(range(1,10), meanVariance, color = 'blue')
+plot.plot(range(1,10), meanBiasSquare, color = 'red', label = "Bias^2")
+plot.plot(range(1,10), meanVariance, color = 'blue', label = "Variance")
 plot.title('Bias^2 & Variance')
 plot.xlabel("Complexity")
-plot.ylabel('Y')
-plot.show()
+plot.ylabel('Error')
+plot.legend()
+plot.savefig('graph2.png')           
+
 
 fig, ax = plot.subplots()
 fig.patch.set_visible(False)
@@ -66,10 +77,12 @@ ax.axis('off')
 ax.axis('tight')
 
 df = pd.DataFrame(np.column_stack((range(1,10) ,meanBiasSquare, meanVariance)) , columns=['Degree', 'Bias^2', 'Variance'])
-df.D = df.D.astype(int)
+df.Degree = df.Degree.astype(int)
 ax.table(cellText=df.values, colLabels=df.columns, loc='center')
 fig.tight_layout()
-plot.title('Bias^2 & Variance' + str(j), loc = 'center')
-plot.show()
+plot.subplots_adjust(top=0.9)
+plot.title('Bias^2 & Variance', loc = 'center')
+plot.savefig('table2.png')           
+
 
 
