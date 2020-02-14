@@ -29,7 +29,7 @@ If the model is too simple and has very few parameters then it may have high bia
 
 It may occur when we 
 - Use less amount of data
-- try to build a linear model with a nonlinear data
+- Try to build a linear model with a nonlinear data
 
 On the other hand if the model has large number of parameters then it’s going to have high variance and low bias. The model captures the noise along with the underlying pattern in data. This is known as ***overfitting***. 
 
@@ -239,7 +239,7 @@ This is calculated and averaged out for each polynomial as follows,
 ```
 - Here, `Y_test` represents the correct output value for the input data point.
 
-### Listed are the plots for the models obtained using the `LinearRegression()` function using the first randomly generated test set for the respective polynomials.
+### Listed are the plots for the models obtained using the `LinearRegression()` function using the first test set for the respective polynomials.
 
 ![Model](./Images/Q2.jpg)
 
@@ -276,3 +276,4 @@ bias and low variance is observed. On the other hand, if our model has a large n
 
 - This is in accordance with the Bias-Variance tradeoff where an optimum model is reached when total error is minimised.
   
+- Here it can be see from the graph that the optimum complexity is 3, tnat is, the polynomial of degree 3 is the best model in terms of having the best Bias-Variance Tradeoff.
