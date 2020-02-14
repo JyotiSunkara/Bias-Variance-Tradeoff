@@ -19,13 +19,13 @@ Irreducible error cannot be reduced regardless of what algorithm is used. It ari
 
 Bias–variance problem is the conflict in trying to simultaneously minimize these two sources of error that prevent supervised learning algorithms from generalizing beyond their training set.
 
-If our model is too simple and has very few parameters then it may have high bias and low variance. The model unable to capture the underlying pattern of the data. This is known as ***underfitting***.
+If the model is too simple and has very few parameters then it may have high bias and low variance. The model is unable to capture the underlying pattern of the data. This is known as ***underfitting***.
 
 It may occur when we 
 - Use less amount of data
 - try to build a linear model with a nonlinear data
 
-On the other hand if our model has large number of parameters then it’s going to have high variance and low bias. The model captures the noise along with the underlying pattern in data. This is known as ***overfitting***. 
+On the other hand if the model has large number of parameters then it’s going to have high variance and low bias. The model captures the noise along with the underlying pattern in data. This is known as ***overfitting***. 
 
 It may occur when we
 - Use a small dataset and the model satisfies these datapoints exactly 
@@ -39,7 +39,6 @@ This tradeoff in complexity is why there is a tradeoff between bias and variance
 > We need to find the right/good balance without overfitting and underfitting the data.
 
 <div style="text-align:center"><img src="./Images/fitting.png" /></div>
-
 
 ## Getting Started
 
