@@ -25,12 +25,13 @@ X_test = X_test[:,np.newaxis]
 linearRegressor = LinearRegression()
 
 meanVariance = []
+meanBias = []
 meanBiasSquare = []
 
 for i in range(1, 10): # Choosing polynomial power 
     
     poly_prediction = []
-    poly = PolynomialFeatures(i)
+    poly = PolynomialFeatures(i, include_bias=False)
     X_test_poly = poly.fit_transform(X_test)
 
     for j in range(0, 20): # Choosing training set
@@ -48,6 +49,7 @@ for i in range(1, 10): # Choosing polynomial power
 
     meanVariance.append(np.mean(np.var(poly_prediction, axis = 0)))
     bias_square = (np.mean(poly_prediction, axis = 0) - Y_test)**2 # 80 bias values - takes mean of all same polynomial models at a test point
+    meanBias.append(np.sqrt(np.mean(bias_square))) # Averages over all test points 
     meanBiasSquare.append(np.mean(bias_square)) # Averages over all test points
 
     i += 1
@@ -85,7 +87,7 @@ fig.patch.set_visible(False)
 ax.axis('off')
 ax.axis('tight')
 
-df = pd.DataFrame(np.column_stack((range(1,10) ,meanBiasSquare, meanVariance)) , columns=['Degree', 'Bias^2', 'Variance'])
+df = pd.DataFrame(np.column_stack((range(1,10) , meanBiasSquare, meanVariance)) , columns=['Degree', 'Bias^2', 'Variance'])
 df.Degree = df.Degree.astype(int)
 ax.table(cellText=df.values, colLabels=df.columns, loc='center')
 fig.tight_layout()

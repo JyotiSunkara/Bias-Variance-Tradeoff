@@ -38,7 +38,7 @@ meanBiasSquare = []
 for i in range(1, 10): # Choosing polynomial power 
     
     poly_prediction = []
-    poly = PolynomialFeatures(i)
+    poly = PolynomialFeatures(i, include_bias=False)
     X_test_poly = poly.fit_transform(X_test)
 
     for j in range(0, 10): # Choosing training set
@@ -50,9 +50,9 @@ for i in range(1, 10): # Choosing polynomial power
     # poly_prediction is a 10*500 matrix
 
     meanVariance.append(np.mean(np.var(poly_prediction, axis = 0)))
-    bias = abs(np.mean(poly_prediction, axis = 0) - Y_test)# 500 bias values - takes mean of all same polynomial models at a test point
+    # bias = abs(np.mean(poly_prediction, axis = 0) - Y_test)# 500 bias values - takes mean of all same polynomial models at a test point
     bias_square = (np.mean(poly_prediction, axis = 0) - Y_test)**2 # 500 bias^2 values - takes mean of all same polynomial models at a test point
-    meanBias.append(np.mean(bias)) # Averages over all test points
+    meanBias.append(np.sqrt(np.mean(bias_square))) # Averages over all test points
     meanBiasSquare.append(np.mean(bias_square)) # Averages over all test points
 
     i += 1
