@@ -92,7 +92,6 @@ plot.xlabel("Complexity")
 plot.ylabel('Error')
 plot.legend()
 plot.savefig("Images/ScaleVariance1.png")
-plot.show()
 plot.close() 
 
 plot.plot(range(1,10), meanBiasSquare, color = 'red', label = "Bias^2")

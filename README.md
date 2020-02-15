@@ -62,8 +62,8 @@ $ eog table2.png
 ```
 Alternately, 
 ```bash
-$ unzip 33_assgn1.zip
-$ cd 33_assgn1
+$ unzip 65_assgn1.zip
+$ cd 65_assgn1
 $ make all
 $ make seeOne  # Data visualization for question 1
 $ make seeTwo  # Data visualization for question 2
@@ -158,6 +158,11 @@ We further average it out for each polynomial.
 <div style="text-align:left;"><img src="./Images/bias1.png" /></div>
 
 ![Graph](./Images/graph1.png)
+
+![Scaled](./Images/ScaleVariance1.png)
+
+![Scaled](./Images/DoubleScale1.png)
+
 
 ### Observervations
 
