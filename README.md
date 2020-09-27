@@ -49,8 +49,6 @@ This tradeoff in complexity is why there is a tradeoff between bias and variance
 
  Unzip the folder, run the scripts and view the saved tables and graphs for question 1 and 2 in the current directory.
 ```bash
-$ unzip 65_assgn1.zip
-$ cd 65_assgn1
 $ pip install -r requirements.txt
 $ python3 q1.py  # Graph and table will be displayed and saved in current directory
 $ eog graph1.png
@@ -62,8 +60,6 @@ $ eog table2.png
 ```
 Alternately, 
 ```bash
-$ unzip 65_assgn1.zip
-$ cd 65_assgn1
 $ make all
 $ make seeOne  # Data visualization for question 1
 $ make seeTwo  # Data visualization for question 2
